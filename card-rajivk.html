@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Business Cards</title>
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --card-w: 300px;
+            --card-h: 580px;
+            --font-main: 'Poppins', sans-serif;
+
+            /* Trisha Colors */
+            --c1-main: #01AAED;
+
+            /* Nick Colors */
+            --c2-main: #d35400;
+
+            /* Allen Colors */
+            --c3-main: #e59866;
+            --c3-light: #f6ddcc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* min-height: 100vh; */
+            /* gap: 40px; */
+            /* padding: 40px; */
+            /* flex-wrap: wrap; */
+        }
+
+        /* --- Base Card --- */
+        .card {
+            /* width: var(--card-w); */
+            /* height: var(--card-h); */
+            max-width: 480px;
+            min-height: 100dvh;
+            background: #fff;
+            /* border-radius: 30px; */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card-header {
+            position: relative;
+            width: 100%;
+        }
+
+        .card-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-top: 35px;
+        }
+
+        .role {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #7f8c8d;
+        }
+
+        .company {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: #95a5a6;
+            margin-bottom: 20px;
+        }
+
+        .bio {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            max-width: 90%;
+        }
+
+        /* --- Logo Box Common --- */
+        .logo-box {
+            position: absolute;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+        }
+
+        /* ============================
+   CARD 1: TRISHA (Wave)
+   ============================ */
+        .card-trisha .card-body {
+            margin-top: -5%;
+        }
+
+        .card-trisha .card-header {
+            height: 45dvh;
+            /* Use clip-path for the image to create the wave cut */
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            /* Ideally use an SVG path for a perfect curve, but polygon approximates the slant well */
+            margin-bottom: -1px;
+            z-index: 5;
+            /* fix sub-pixel gap */
+        }
+
+        /* The purple wavy accent line */
+        .card-trisha .wave-accent {
+            position: absolute;
+            /* bottom: 0; */
+            /* left: 0; */
+            width: 100%;
+            height: 47dvh;
+            background: var(--c1-main);
+            z-index: 1;
+            /* Create an S-Curve visually using border-radius on a pseudo element approach or similar */
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+
+            opacity: 0.8;
+        }
+
+        /* Better Wave Implementation using radial-gradient mask if browser supports, 
+   but for pure CSS shape matching the image: */
+        .card-trisha .card-header {
+            /* Overriding the polygon for a curved look */
+            /* clip-path: path('M0,0 L300,0 L300,180 C160,260 80,180 0,230 Z'); */
+        }
+
+        .card-trisha .logo-box {
+            padding: 22px;
+            /* width: 50px; */
+            /* height: 50px; */
+            border-radius: 12px;
+            /* bottom: 20px; */
+            top: 33%;
+            /* Positioned inside the image area relative to curve */
+            right: 30px;
+        }
+
+        .card-trisha .logo-box i {
+            color: var(--c1-main);
+            font-size: 1.5rem;
+        }
+
+        .contact-list {
+            list-style: none;
+            width: 100%;
+            margin-top: auto;
+            margin-bottom: 52px;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            color: #555;
+            text-align: left;
+        }
+
+        .contact-list li a {
+            font-size: 0.85rem;
+            color: #555;
+            text-decoration: none;
+        }
+
+        .icon-circle {
+            width: 28px;
+            height: 28px;
+            background: var(--c1-main);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 12px;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .save-contact-btn {
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            /* margin-top: 35px; */
+            background-color: var(--c1-main);
+            padding-block: 8px;
+            border-radius: 12px;
+            width: 95%;
+            position: absolute;
+            margin-bottom: 4%;
+            bottom: 0%;
+            color: white;
+            transition: color .8s;
+        }
+
+        .save-contact-btn:hover {
+            color: rgb(226, 226, 226);
+            background-color: #27b5ed;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- CARD 1: Trisha (S-Wave Style) -->
+    <div class="card card-trisha">
+        <div class="card-header">
+            <img src="/assets/1654751794945.jpg" alt="Rajiv P Kapahi">
+        </div>
+        <div class="wave-accent"></div>
+        <div class="logo-box">
+            <!-- <i class="fa-brands fa-vuejs"></i> -->
+            <img style="width: 80px;" src="/assets/logo-aspire-impact.png" alt="logo aspire impact">
+        </div>
+
+        <div class="card-body">
+            <h2 class="name">Rajiv P Kapahi</h2>
+            <p class="role">Board of Advisors</p>
+            <p class="company">Aspire Impact</p>
+            <p class="bio">Leveraging nearly 3 decades of rich, cross functional & diverse CXO level corporate
+                experience in India & Overseas to design, transform & drive innovative & impactful changes, harnessing
+                collective knowledge of diverse domain experts & influential leaders across industries. </p>
+
+            <ul class="contact-list">
+                <li>
+                    <span class="icon-circle"><i class="fa-solid fa-phone"></i></span>
+                    <a href="tel:+91 99996 18045">+91 99996 18045</a>
+                </li>
+                <li>
+                    <span class="icon-circle"><i class="fa-solid fa-envelope"></i></span>
+                    <a href="mailto:rajivpkapahi@aspireimpact.in">rajivpkapahi@aspireimpact.in</a>
+                </li>
+                <li>
+                    <span class="icon-circle"><i class="fa-solid fa-location-dot"></i></span>
+                    South Delhi, India
+                </li>
+            </ul>
+
+            <!-- Button that downloads a vCard -->
+            <a class="save-contact-btn" href="/assets/RajivKapahi.vcf" download="RajivKapahi">
+                Save Contact
+            </a>
+        </div>
+    </div>
+
+</body>
+
+</html>
